@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Personal page of Bianca: research internships, papers, and academic background.">
+<style>
+/* tokens */
+:root{
+  --paper:#FBFBF9;
+  --ink:#16181D;
+  --light_green:#284a0b8f;;
+  --link:#284a0b;;
+  --tint:#e2ffb73b;
+  --shadow-soft:rgba(160, 170, 150, 0.833);
+  --white:#fff;
+  --toc-bg:#3d830338;
+  --toc-ring:rgba(24, 95, 0, 0.12);
+  --entry-body-color:#000000;
+  --serif:"Latin Modern Roman","Latin Modern", "LM Roman 10", "CMU Serif", Georgia, "Times New Roman", serif;
+  --mono:"Latin Modern Mono","LM Mono 10","CMU Typewriter Text", Consolas, "Courier New", monospace;
+
+  --measure:55rem;
+  --gutter:5.5rem;
+  --page-pad:clamp(1rem, 2.5vw, 1.5rem);
+}
+
+/* reset */
+*,*::before,*::after{box-sizing:border-box}
+body,h1,h2,h3,p,ul,ol,li,figure{margin:0;padding:0}
+ul,ol{list-style:none}
+
+html{-webkit-text-size-adjust:100%}
+body{
+  position:relative;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--serif);
+  font-size:clamp(16px, 0.95rem + 0.3vw, 18px);
+  line-height:1.7;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+
+.corner-graphic{
+  position:absolute;
+  top: 0;
+  left:calc(max(0px, (100vw - var(--measure)) / 2) + var(--page-pad));
+  transform:translateX(calc(-100% + 45mm));
+  width:15rem;
+  height:auto;
+  pointer-events:none;
+  z-index:1000;
+}
+
+a{color:var(--link);text-decoration:none;border-bottom:1px solid var(--link);transition:border-color .15s ease,background-color .15s ease}
+a:hover{border-bottom-color:var(--link);background:var(--tint)}
+:focus-visible{outline:2px solid var(--link);outline-offset:3px;border-radius:2px}
+
+/* layout */
+.page{
+  width:min(100%, var(--measure));
+  margin:0 auto;
+  padding:3rem var(--page-pad) 4rem;
+}
+
+/* masthead */
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--light_green);
+}
+.masthead{
+  display:flex;
+  align-items:center;
+  gap:1.2rem;
+  flex-wrap:wrap;
+}
+.profile-photo{
+  width:clamp(88px, 13vw, 120px);
+  height:auto;
+  object-fit:contain;
+  border:2px solid var(--light_green);
+  background:var(--white);
+}
+.masthead-text{flex:1 1 18rem}
+.name{
+  font-size:clamp(1.9rem, 4.2vw + 0.9rem, 3rem);
+  font-weight:400;
+  letter-spacing:-.022em;
+  line-height:1.04;
+  margin:.7rem 0 .45rem;
+}
+
+/* nav */
+.toc{
+  margin:2.2rem 0 1rem;
+  padding:0.8rem 1rem;
+  display:flex;
+  flex-wrap:wrap;
+  gap:.35rem 1.6rem;
+  background: var(--toc-bg);
+  border-radius: 0rem;
+  box-shadow: inset 0 0 0 1px var(--toc-ring);
+}
+.toc a{
+  border-bottom:0;
+  color:var(--light_green);
+  font-size:1.1rem;
+  padding-bottom:2px;
+  box-shadow:inset 0 -1px 0 transparent;
+  transition:color .15s ease,box-shadow .15s ease;
+  background:none;
+}
+.toc a:hover{color:var(--ink);background:none}
+.toc a[aria-current="page"]{color:var(--ink);font-weight:400;box-shadow:inset 0 -2px 0 var(--link)}
+.toc .num{font-family:var(--mono);font-size:.76rem;color:var(--link);margin-right:.4em;letter-spacing:.02em}
+
+/* sections */
+.section-title{
+  font-size:1.45rem;
+  font-weight:400;
+  letter-spacing:-.012em;
+  margin-bottom:1.9rem;
+  display:flex;
+  align-items:baseline;
+  gap:0;
+  justify-content:flex-start;
+}
+.section-title .num{font-family:var(--mono);font-size:.85rem;font-weight:400;color:var(--link);letter-spacing:0}
+
+/* abstract on the title page */
+.abstract{text-align:justify;hyphens:auto;margin-bottom:1.5rem}
+.abstract .runin{font-weight:600;letter-spacing:.01em}
+.abstract .runin::after{content:" - ";font-weight:400;color:var(--light_green)}
+
+/* entries */
+.entries{display:flex;flex-direction:column}
+.entry{padding:1.5rem 0}
+.entry:first-child{padding-top:0}
+.entry-when{
+  font-family:var(--mono);
+  font-size:.78rem;
+  color:var(--light_green);
+  letter-spacing:.02em;
+  padding-top:.42rem;
+  white-space:normal;
+  line-height:1.6;
+  overflow-wrap:anywhere;
+}
+.entry-head{font-size:1rem;font-weight:400;line-height:1.45;letter-spacing:-.005em}
+.entry-head .label{font-family:var(--mono);font-size:.8rem;font-weight:400;color:var(--link)}
+.entry-sub{font-style:italic;color:var(--light_green);font-size:.8rem;line-height:1.5;margin-top:.15rem}
+.entry-body{margin-top:.6rem;font-size:1rem;color:var(--entry-body-color)}
+.entry-links{margin-top:.55rem;display:flex;flex-wrap:wrap;gap:.25rem 1.1rem;font-family:var(--mono);font-size:.8rem}
+.entry-links a{border-bottom-color:var(--link)}
+
+.tag{
+  font-family:var(--mono);
+  font-size:.68rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--light_green);
+  border:1px solid var(--link);
+  border-radius:2px;
+  padding:.1rem .4rem;
+  white-space:nowrap;
+  vertical-align:.12em;
+}
+
+@media (min-width:720px){
+  .entry{
+    display:grid;
+    grid-template-columns:minmax(8.5rem, 9.5rem) minmax(0, 1fr);
+    column-gap:1.2rem;
+    align-items:start;
+  }
+  .entry > div:last-child{min-width:0}
+}
+@media (max-width:719px){
+  .entry{display:block}
+  .entry-when{padding-top:0;margin-bottom:.35rem}
+}
+@media (max-width:600px){
+  .toc{gap:.3rem .9rem}
+  .masthead{align-items:flex-start}
+  .profile-photo{width:72px;height:72px}
+  .section-title{flex-direction:column;align-items:flex-start;gap:.25rem;margin-bottom:1.3rem}
+  .contact{flex-direction:column;gap:.6rem 0}
+  .foot{flex-direction:column;gap:.5rem}
+}
+@media (max-width:480px){
+  .page{padding-inline:1rem}
+  .entry-when{white-space:normal}
+}
+
+/*  contact line */
+.contact{
+  margin-top:1rem;
+  padding-top:1rem;
+  display:flex;flex-direction:column;gap:.4rem;
+  font-family:var(--mono);font-size:.8rem;
+}
+.contact .k{color:var(--light_green)}
+.contact .email-value{color:var(--link)}
+
+/* footer */
+.foot{
+  margin-top:4rem;padding-top:1.1rem;
+  font-family:var(--mono);font-size:.72rem;color:var(--light_green);
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+}
+
+.section{margin-bottom:4rem}
+body.js .section{display:none;margin-bottom:0}
+body.js .section.is-active{display:block;animation:rise .28s ease both}
+@keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){
+  body.js .section.is-active{animation:none}
+  *{transition-duration:.01ms !important}
+}
+</style>
+</head>
+
+<body>
+<img class="corner-graphic" src="corner.png" alt="" aria-hidden="true">
+<div class="page">
+
+  <header class="masthead">
+    <div class="masthead-text">
+      <h1 class="name">Bianca Oancea</h1>
+      <div class="contact">
+        <span><span class="k">email</span> <span class="email-value">firstName.lastName@universite-paris-saclay.fr</span></span>
+        <span><span class="k">cv</span> <a href="CV.pdf">cv.pdf</a></span>
+        <span><span class="k">github</span> <a href="https://github.com/biancaoan/">@biancaoan</a></span>
+      </div>
+    </div>
+    <img class="profile-photo" src="pfp.jpg" alt="Bianca Oancea">
+  </header>
+
+  <!--  MENU -->
+  <nav class="toc" aria-label="Sections">
+    <a href="#home" data-route="home"><span class="num"></span>Home</a>
+    <a href="#experience" data-route="experience"><span class="num"></span>Experience</a>
+    <a href="#papers" data-route="papers"><span class="num"></span>Papers</a>
+    <a href="#education" data-route="education"><span class="num"></span>Education</a>
+  </nav>
+
+  <main>
+
+  <!-- HOME -->
+  <section class="section" id="home">
+     <h2 class="section-title"><span class="num"></span>About me</h2>
+      <span class="runin"> Hi! I'm a student currently studying at Université Paris-Saclay, finishing my bachelor in computer science.
+        <br>
+        I was born and raised in Bucharest and I moved to France at 18 for my undergraduate studies.
+        I am pursuing my third year of bachelor's, Licence Double-Diplôme Informatique, Mathématiques within the Magistère Informatique program.
+        <br>
+        I am particularly interested in theoretical computer science, especially algorithmics and graph theory. 
+        I have pursued these interests through two internships at LISN, within the GALAC team: a two-month
+        internship focused on a codind project involving graph coloring, and a nine-month internship on graph reconstruction.
+       <br>
+        My native language is romanian but I also have a C2 level in english and a C1 level in french.
+        
+      </p>
+
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="section" id="experience">
+
+    <!-- INTERNSHIPS -->
+
+    <h2 class="section-title"><span class="num"></span>Research internships</h2>
+
+    <ol class="entries">
+      <li class="entry">
+        <div class="entry-when">December 2025 - August 2026</div>
+        <div>
+          <h3 class="entry-head"><span class="label"></span>Study of graph reconstruction</h3>
+          <p class="entry-sub">LISN, Université Paris-Saclay, supervised by
+            <a href="https://hoang-la-e7596d.gitpages.iut-orsay.fr/">Hoang La</a> 
+            and <a href="https://perso.lisn.upsaclay.fr/jcohen/fr/">Johanne Cohen</a> 
+          </p>
+          <p class="entry-body">
+            During this nine-month research internship I worked on graph reconstruction problems. 
+            In doing so, I had the chance to discover this subject and at the same time learn about
+            Ramsey theory, graph algorithms, and randomized algorithms. Moreover, it was a great opportunity 
+            to see what research looks like: how an open problem is approached, how a literature review is 
+            carried out, and how an article is written. During this internship I contributed to the main result, 
+            an algorithm for reconstructing graphs, and helped write the article in LaTeX.
+          </p>
+          <p class="entry-links">
+            <a href="#">Abstract</a>
+          </p>
+          <p class="entry-links">
+            <a href="#">Slides</a>
+          </p>
+        </div>
+      </li>
+
+      <li class="entry">
+        <div class="entry-when">May - June 2025</div>
+        <div>
+          <h3 class="entry-head"><span class="label"></span>Coding project of a graph coloring game</h3>
+          <p class="entry-sub">LISN, Université Paris-Saclay, supervised by 
+            <a href="https://hoang-la-e7596d.gitpages.iut-orsay.fr/">Hoang La</a> 
+            and <a href="https://perso.lisn.upsaclay.fr/ccheneviere/home.html">Clément Chenevière</a> 
+          </p>
+          <p class="entry-body">
+            During this internship I developed a web game in which the user is given a graph to color, 
+            with the aim of introducing them to some graph theory along the way. The project allowed me to strengthen my Python skills.
+            I also dicovered how to use SageMath, and about its contribution process. The game's interface was built in JavaScript, 
+            HTML and CSS using a web framework, and the project as a whole was an opportinity to learn proper Git practices.
+          </p>
+          <p class="entry-links">
+            <a href="https://github.com/biancaoan/Graph-coloring-game">git repository</a>
+          </p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- WORKSHOPS -->
+
+   <section class="section" id="experience">
+    <h2 class="section-title"><span class="num"></span>Workshops</h2>
+
+    <ol class="entries">
+      <li class="entry">
+        <div class="entry-when">July 2026</div>
+        <div>
+          <h3 class="entry-head"><span class="label"></span>Workshop on a word reconstruction problem</h3>
+          <p class="entry-sub">LISN, Université Paris-Saclay </p>
+          <p class="entry-body">
+          The three-day workshop focused on a word reconstruction problem. We studied which partitions of a word's 
+          k-subsequences allow the original word to be uniquely reconstructed. During this experience, I learned 
+          about different proof methods, how to approach an open problem, and what collaborative work in computer 
+          science research looks like. I had the chance to exchange ideas and work with people with 
+          different perspectives and expertise in graph theory.
+        </div>
+      </li>
+    </ol>
+  </section>
+
+
+   <section class="section" id="experience">
+    <h2 class="section-title"><span class="num"></span>Tutoring</h2>
+
+    <ol class="entries">
+      <li class="entry">
+        <div class="entry-when">2022 - 2024</div>
+        <div>
+          <h3 class="entry-head"><span class="label"></span>Tutoring younger students in Mathematics</h3>
+          <p class="entry-body">
+          During my final two years of high school, I tutored first-year students in mathematics,
+          mainly algebra and trigonometry. Teaching the material meant revising it thoroughly and
+          deepening my own understanding. Moreover, it improved my ability to explain and formalise
+          mathematical concepts.
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- PAPERS -->
+  <section class="section" id="papers">
+    <h2 class="section-title"><span class="num"></span>Papers </h2>
+
+    <ol class="entries">
+      <li class="entry">
+        <div class="entry-when">2026</div>
+        <div>
+          <h3 class="entry-head"><span class="label"></span>Graph reconstruction notes </h3>
+          <p class="entry-sub"><a href="https://hoang-la-e7596d.gitpages.iut-orsay.fr/">Hoang La</a>, <a href="https://perso.lisn.upsaclay.fr/jcohen/fr/">Johanne Cohen</a>, Bianca Oancea</p>
+          <p class="entry-body">
+            Add resume
+          </p>
+          <p class="entry-links">
+            <a href="#">arXiv:2601.00000</a>
+          </p>
+        </div>
+      </li>
+
+    </ol>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="section" id="education">
+    <h2 class="section-title"><span class="num"></span>Education</h2>
+
+    <ol class="entries">
+
+      <li class="entry">
+        <div class="entry-when">2024–2027</div>
+        <div>
+          <h3 class="entry-head"><span class="label"></span>Bachelor's student in Computer Sciences</h3>
+          <p class="entry-sub">Université Paris-Saclay, France.</p>
+          <p class="entry-body">During the first year of my Bachelor's degree, I followed the multidisciplinary program  <a href="https://www.universite-paris-saclay.fr/formation/licence/informatique/l1-portail-mathematiques-informatique-mi">L1 Portail Mathématiques, Informatique</a>,
+            providing a strong foundation in both Mathematics and Computer Science. 
+            <br> In my second year, I chose the <a href="https://www.universite-paris-saclay.fr/formation/licence/informatique/l2-informatique">L2 Informatique</a> and 
+            for my third year, I was accepted in the <a href="https://www.universite-paris-saclay.fr/formation/licence-double-diplome/informatique-mathematiques/ldd3-informatique-cursus-magistere-orsay">LDD3 Informatique, Mathématiques, Parcours Magistère Informatique.</a>, 
+            allowing me to pursue a more advanced and research-oriented curriculum alongside my Bachelor's degree.
+            </p>
+        </div>
+      </li>
+
+      <li class="entry">
+        <div class="entry-when">2020-2024</div>
+        <div>
+          <h3 class="entry-head"><span class="label"></span> Student in the Mathematics and Computer Science program</h3>
+          <p class="entry-sub"> Tudor Vianu National High School of Computer Science, Bucharest, Romania.</p>
+            </p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  </main>
+
+  <footer class="foot">
+    <span>Last updated: September 2026</span>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+
+  document.body.classList.add('js');
+
+  var links    = Array.prototype.slice.call(document.querySelectorAll('.toc a[data-route]'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('.section'));
+  var titles   = { home: 'Home', experience: 'Experience', papers: 'Papers', education: 'Education' };
+
+  function route() {
+    var id = location.hash.replace('#', '') || 'home';
+    if (!document.getElementById(id)) id = 'home';
+
+    sections.forEach(function (s) { s.classList.toggle('is-active', s.id === id); });
+    links.forEach(function (a) {
+      if (a.dataset.route === id) a.setAttribute('aria-current', 'page');
+      else a.removeAttribute('aria-current');
+    });
+
+    document.title = id === 'home' ? titles.home
+                                   : titles[id];
+    window.scrollTo(0, 0);
+  }
+
+  window.addEventListener('hashchange', route);
+  route();
+})();
+</script>
+</body>
+</html>
