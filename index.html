@@ -22,7 +22,7 @@
 
   --measure:55rem;
   --gutter:5.5rem;
-  --page-pad:clamp(1rem, 2.5vw, 1.5rem);
+  --page-pad:clamp(2.5rem, 3vw, 3rem);
 }
 
 /* reset */
@@ -80,7 +80,7 @@ a:hover{border-bottom-color:var(--link);background:var(--tint)}
   flex-wrap:wrap;
 }
 .profile-photo{
-  width:clamp(88px, 13vw, 120px);
+  width:clamp(20px, 20vw, 120px);
   height:auto;
   object-fit:contain;
   border:2px solid var(--light_green);
@@ -187,13 +187,13 @@ a:hover{border-bottom-color:var(--link);background:var(--tint)}
 @media (max-width:600px){
   .toc{gap:.3rem .9rem}
   .masthead{align-items:flex-start}
-  .profile-photo{width:72px;height:72px}
+  .profile-photo{width:72px;height:auto}
   .section-title{flex-direction:column;align-items:flex-start;gap:.25rem;margin-bottom:1.3rem}
   .contact{flex-direction:column;gap:.6rem 0}
   .foot{flex-direction:column;gap:.5rem}
 }
 @media (max-width:480px){
-  .page{padding-inline:1rem}
+  .page{padding-inline:3rem}
   .entry-when{white-space:normal}
 }
 
