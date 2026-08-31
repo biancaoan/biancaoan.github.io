@@ -47,7 +47,7 @@ body{
   position:absolute;
   top: 0;
   left:calc(max(0px, (100vw - var(--measure)) / 2) + var(--page-pad));
-  transform:translateX(calc(-100% + 45mm));
+  transform:translateX(calc(-100% + 47mm));
   width:15rem;
   height:auto;
   pointer-events:none;
@@ -77,7 +77,7 @@ a:hover{border-bottom-color:var(--link);background:var(--tint)}
   display:flex;
   align-items:center;
   gap:1.2rem;
-  flex-wrap:wrap;
+  flex-wrap:nowrap;
 }
 .profile-photo{
   width:clamp(20px, 20vw, 120px);
@@ -85,8 +85,9 @@ a:hover{border-bottom-color:var(--link);background:var(--tint)}
   object-fit:contain;
   border:2px solid var(--light_green);
   background:var(--white);
+  flex-shrink:0;
 }
-.masthead-text{flex:1 1 18rem}
+.masthead-text{flex:1 1 18rem;min-width:0}
 .name{
   font-size:clamp(1.9rem, 4.2vw + 0.9rem, 3rem);
   font-weight:400;
@@ -203,6 +204,7 @@ a:hover{border-bottom-color:var(--link);background:var(--tint)}
   padding-top:1rem;
   display:flex;flex-direction:column;gap:.4rem;
   font-family:var(--mono);font-size:.8rem;
+  overflow-wrap:anywhere;
 }
 .contact .k{color:var(--light_green)}
 .contact .email-value{color:var(--link)}
