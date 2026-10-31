@@ -155,6 +155,7 @@ a:hover{border-bottom-color:var(--link);background:var(--tint)}
 .entry-head{font-size:1rem;font-weight:400;line-height:1.45;letter-spacing:-.005em}
 .entry-head .label{font-family:var(--mono);font-size:.8rem;font-weight:400;color:var(--link)}
 .entry-sub{font-style:italic;color:var(--light_green);font-size:.8rem;line-height:1.5;margin-top:.15rem}
+.entry-categ{font-style:italic;color:var(--light_green);font-size:1rem;line-height:1.5;margin-top:.12rem}
 .entry-body{margin-top:.6rem;font-size:1rem;color:var(--entry-body-color)}
 .entry-links{margin-top:.55rem;display:flex;flex-wrap:wrap;gap:.25rem 1.1rem;font-family:var(--mono);font-size:.8rem}
 .entry-links a{border-bottom-color:var(--link)}
@@ -218,10 +219,9 @@ a:hover{border-bottom-color:var(--link);background:var(--tint)}
 
 /* coursework */
 
-.coursework { margin-top: 0.8em; }
+.coursework { margin-top: 0.8em; font-size: 1rem; }
 .coursework-title {
-  font-variant: small-caps;
-  letter-spacing: 0.04em;
+  color: var(--link);
   margin: 0 0 0.3em;
 }
 .coursework dl {
@@ -230,7 +230,7 @@ a:hover{border-bottom-color:var(--link);background:var(--tint)}
   gap: 0.25em 1em;
   margin: 0;
 }
-.coursework dt { font-style: italic; }
+.coursework dt { font-style: normal; }
 .coursework dd { margin: 0; }
 @media (max-width: 600px) {
   .coursework dl { grid-template-columns: 1fr; }
@@ -467,16 +467,14 @@ body.js .section.is-active{display:block;animation:rise .28s ease both}
             allowing me to pursue a more advanced and research-oriented curriculum alongside my Bachelor's degree.
           </p>
           <div class="coursework">
-            <p class="coursework-title">Some of my coursework</p>
+            <p class="coursework-title">Relevant coursework:</p>
             <dl>
-              <dt>Theory</dt>
-              <dd>Algorithmics 1-3 · Distributed and Parallel Algorithms · Theoretical Computer Science · Combinatorial Optimization · Formal Languages · Theory of Compilation · Logic for Computer Science</dd>
-              <dt>Mathematics</dt>
-              <dd>Calculus · Real Analysis · Linear Algebra · Optimization and Applications</dd>
-              <dt>Programming</dt>
-              <dd>Modular Programming · Object-Oriented Programming · Advanced Functional Programming</dd>
-              <dt>Systems</dt>
-              <dd>Computer Architecture · Operating Systems &amp; Concurrent Programming · Networks · Databases</dd>
+              <p class="entry-categ">Theory</p>
+              <dd>Algorithmics 1-3 · Distributed and Parallel Algorithms · Theoretical Computer Science · Combinatorial Optimization · Formal Languages · Theory of Compilation </dd>
+              <p class="entry-categ">Mathematics</p>
+              <dd>Analysis · Linear Algebra · Optimization and Applications</dd>
+              <p class="entry-categ">Programming</p>
+              <dd>Object-Oriented Programming · Advanced Functional Programming · Operating Systems &amp; Concurrent Programming</dd>
             </dl>
           </div>
         </div>
